@@ -1,0 +1,9 @@
+{
+  "appName": "스티커 메모 앱",
+  "navbar": {
+    "home": "홈",
+    "myNotes": "내 노트",
+    "calendar": "캘린더",
+    "language": "언어"
+  }
+}

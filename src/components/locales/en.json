@@ -1,0 +1,8 @@
+{
+  "appName": "Sticky Notes App",
+  "navbar": {
+    "home": "Home",
+    "myNotes": "My Notes",
+    "calendar": "Calendar"
+  }
+}
