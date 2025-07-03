@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import DOMPurify from 'dompurify';
 import { v4 as uuidv4 } from 'uuid';
-// import Button from './Button';
+import Button from './Button';
 
 // Shared constants and utilities
 const colorOptions = [

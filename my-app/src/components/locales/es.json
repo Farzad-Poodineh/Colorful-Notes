@@ -1,0 +1,11 @@
+{
+  "appName": "Aplicación de Notas Adhesivas",
+  "navbar": {
+    "home": "Inicio",
+    "myNotes": "Mis Notas",
+    "calendar": "Calendario"
+  },
+  "notefield": {
+    "addNewNote": "Añadir Nueva Nota"
+  }
+}
