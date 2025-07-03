@@ -1,9 +1,0 @@
-{
-  "appName": "Application de Notes Autocollantes",
-  "navbar": {
-    "home": "Accueil",
-    "myNotes": "Mes Notes",
-    "calendar": "Calendrier",
-    "language": "Langue"
-  }
-}

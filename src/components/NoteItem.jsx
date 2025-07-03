@@ -6,6 +6,7 @@ import ContentEditable from 'react-contenteditable';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import DOMPurify from 'dompurify';
+import { colorOptions, getRandomColor } from './Constants'; // ✅ Make sure this line is present
 
 const MAX_LENGTH = 200;
 
@@ -35,10 +36,14 @@ const NoteItem = React.memo(
       setIsSaved(true);
     }, [note.id, content, selectedDate, noteColor, handleUpdateNote]);
 
-    const handleColorSelect = useCallback((color) => {
-      setNoteColor(color);
-      setShowColorPicker(false);
-    }, []);
+    const handleColorSelect = useCallback(
+      (color) => {
+        setNoteColor(color);
+        setShowColorPicker(false);
+        handleUpdateNote(note.id, content, selectedDate, color); // ✅ Save selected color
+      },
+      [note.id, content, selectedDate, handleUpdateNote]
+    );
 
     const toggleEdit = useCallback(() => setIsEditing((prev) => !prev), []);
     const toggleColorPicker = useCallback(

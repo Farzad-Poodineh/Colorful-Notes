@@ -4,9 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import StickyNotesBackground from './StickyNotesBackground';
 import NoteItem from './NoteItem';
 import NotesCalendar from './NotesCalendar';
-import { colorOptions, getRandomColor } from './Constants';
-
-const MAX_LENGTH = 200;
+import { getRandomColor, colorOptions } from './Constants';
 
 function NoteField() {
   const [notes, setNotes] = useState([]);
@@ -14,7 +12,6 @@ function NoteField() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load notes from localStorage
   useEffect(() => {
     const loadNotes = () => {
       try {
@@ -29,14 +26,12 @@ function NoteField() {
     loadNotes();
   }, []);
 
-  // Save notes to localStorage
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem('notes', JSON.stringify(notes));
     }
   }, [notes, isLoading]);
 
-  // Filter notes based on selected date
   const filteredNotes = useMemo(() => {
     if (!selectedDate) return notes;
     return notes.filter((note) => {
@@ -107,26 +102,28 @@ function NoteField() {
     <StickyNotesBackground>
       <div className='min-h-screen flex flex-col items-center p-4'>
         <div className='w-full max-w-6xl'>
-          <div className='flex flex-col sm:flex-row justify-between items-center mb-6 gap-4'>
+          {/* ✅ Responsive Button Controls */}
+          <div className='flex flex-wrap gap-3 justify-center sm:justify-between items-center mb-6'>
             <button
               onClick={handleAddNote}
-              className='overflow-hidden rounded-md bg-pink-600 px-5 py-2.5 text-white [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90  hover:bg-red-300 hover:text-black hover:transition hover:duration-300 hover:ease-in-out'
+              className='w-full sm:w-auto text-center rounded-md bg-pink-600 px-5 py-2.5 text-white text-base font-semibold [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90 hover:bg-red-300 hover:text-black transition duration-300 ease-in-out'
             >
-              <span className='text-lg'>+</span> Add New Note
+              <span className='text-lg mr-1'>+</span> Add New Note
             </button>
 
-            <div className='flex gap-2 w-full sm:w-auto'>
+            <div className='flex flex-col sm:flex-row gap-3 w-full sm:w-auto'>
               {selectedDate && (
                 <button
                   onClick={clearDateFilter}
-                  className='px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors flex items-center gap-2 flex-1 justify-center'
+                  className='w-full sm:w-auto px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors text-center'
                 >
                   Clear Date Filter
                 </button>
               )}
+
               <button
                 onClick={toggleCalendar}
-                className='flex gap-2 items-center overflow-hidden rounded-md bg-pink-600 px-5 py-2.5 text-white duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90  hover:bg-red-300 hover:text-black transition hover:duration-300 hover:ease-in-out'
+                className='w-full sm:w-auto flex justify-center items-center gap-2 rounded-md bg-pink-600 px-5 py-2.5 text-white font-semibold duration-300 active:translate-y-1 active:scale-x-110 active:scale-y-90 hover:bg-red-300 hover:text-black transition'
               >
                 <FaCalendarAlt />
                 {showCalendar ? 'Hide Calendar' : 'Show Calendar'}
@@ -166,7 +163,6 @@ function NoteField() {
                   noteIndex={index + 1}
                   handleDeleteNote={handleDeleteNote}
                   handleUpdateNote={handleUpdateNote}
-                  colorOptions={colorOptions}
                 />
               ))
             ) : (
@@ -179,7 +175,7 @@ function NoteField() {
                 {!selectedDate && (
                   <button
                     onClick={handleAddNote}
-                    className='overflow-hidden rounded-md bg-neutral-950 px-5 py-2.5 text-white [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90  hover:bg-gray-600 transition duration-300 ease-in-out'
+                    className='mt-4 overflow-hidden rounded-md bg-neutral-950 px-5 py-2.5 text-white font-semibold active:translate-y-1 active:scale-x-110 active:scale-y-90 hover:bg-gray-600 transition duration-300 ease-in-out'
                   >
                     Create First Note
                   </button>
