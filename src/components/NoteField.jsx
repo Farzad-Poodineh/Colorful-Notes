@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import StickyNotesBackground from './StickyNotesBackground';
 import NoteItem from './NoteItem';
 import NotesCalendar from './NotesCalendar';
-import { getRandomColor, colorOptions } from './constants';
+import { getRandomColor, colorOptions } from './Constants';
 
 function NoteField() {
   const [notes, setNotes] = useState([]);

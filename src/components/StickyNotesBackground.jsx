@@ -1,14 +1,13 @@
 import React from 'react';
 
-// Animation styles moved to a constant for better organization
 const ANIMATION_STYLES = `
   @keyframes sway {
-    0%, 100% { transform: rotate(var(--start-rotate)) translateX(0); }
-    50% { transform: rotate(var(--end-rotate)) translateX(var(--translate-x)); }
+    0%, 100% { transform: rotate(var(--start-rotate, -2deg)) translateX(0); }
+    50% { transform: rotate(var(--end-rotate, 2deg)) translateX(var(--translate-x, 5px)); }
   }
 
   .sway-element {
-    animation: sway var(--duration) ease-in-out infinite;
+    animation: sway var(--duration, 6s) ease-in-out infinite;
   }
 `;
 
@@ -20,8 +19,8 @@ const SeaLeaves = ({ position }) => {
 
   const leafConfigs = [
     {
-      top: '1/5',
-      height: '2/3',
+      top: isLeft ? 'top-[20%]' : 'top-[20%]',
+      height: 'h-[66.66%]',
       color: 'bg-cyan-400',
       blur: 'blur-sm',
       vars: {
@@ -32,8 +31,8 @@ const SeaLeaves = ({ position }) => {
       },
     },
     {
-      top: isLeft ? '1/3' : '1/2',
-      height: isLeft ? '1/2' : '1/2',
+      top: isLeft ? 'top-[33%]' : 'top-[50%]',
+      height: 'h-[50%]',
       color: 'bg-cyan-300',
       blur: 'blur-sm',
       vars: {
@@ -44,8 +43,8 @@ const SeaLeaves = ({ position }) => {
       },
     },
     {
-      top: isLeft ? '2/3' : '1/5',
-      height: isLeft ? '1/3' : '2/3',
+      top: isLeft ? 'top-[66%]' : 'top-[20%]',
+      height: isLeft ? 'h-[33%]' : 'h-[66.66%]',
       color: 'bg-cyan-500',
       blur: 'blur-md',
       vars: {
@@ -62,9 +61,9 @@ const SeaLeaves = ({ position }) => {
       {leafConfigs.map((config, index) => (
         <div
           key={index}
-          className={`absolute ${isLeft ? 'left-0' : 'right-0'} top-${
-            config.top
-          } h-${config.height} w-full ${config.color} ${
+          className={`absolute ${isLeft ? 'left-0' : 'right-0'} ${config.top} ${
+            config.height
+          } w-full ${config.color} ${
             isLeft ? 'rounded-r-full' : 'rounded-l-full'
           } ${config.blur} sway-element`}
           style={config.vars}
